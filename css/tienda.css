@@ -1,4 +1,5 @@
-:root{--ink:#111;--muted:#6b7280;--soft:#f6f5f2;--line:#e8e6e1;--accent:#ff6a13;--accent2:#e0560a;--accent-soft:#fff1e6;--ok:#16a34a}
+/* Cambio 2026-11-10 01:06:55 - Se aplicó la paleta azul metálico, dorado y gris perla. */
+:root{--ink:#172b3f;--muted:#687786;--soft:#eef2f4;--line:#d8e0e5;--accent:#c99a3b;--accent2:#9a6d18;--accent-soft:#fbf4e5;--ok:#16845b}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;color:var(--ink);background:#fff;line-height:1.5;-webkit-tap-highlight-color:transparent}
@@ -18,6 +19,8 @@ body.con-barra .copy{padding-bottom:100px}
 .btn.wa{background:#25a244}
 .btn.wa:hover{background:#1f8a39}
 .btn[disabled]{background:#e5e1da;color:#8a8479;cursor:not-allowed}
+/* Cambio 2026-11-10 01:06:55 - Se reforzó el aviso rojo del estado AGOTADO en las tarjetas. */
+.btn.agotado-accion{background:#fff0f0;color:#c62828;border:1px solid #ef9a9a}
 .btn-claro{display:inline-block;background:#fff;color:var(--ink);padding:14px 30px;border-radius:999px;font-weight:700}
 .btn-claro:hover{background:#f1f1f1}
 .btn-claro.peq-btn{padding:10px 22px;margin-top:14px;font-size:.9rem}
@@ -54,7 +57,7 @@ body.con-barra .copy{padding-bottom:100px}
 /* portada */
 .portada{position:relative;height:clamp(400px,72vh,740px);background:#222;overflow:hidden}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#222;opacity:0;transition:opacity .7s;display:flex;align-items:center;pointer-events:none}
-.slide.sin-img{background-image:linear-gradient(135deg,#ff6a13,#1f2937)}
+.slide.sin-img{background-image:linear-gradient(135deg,#173b5f,#c99a3b)}
 .slide.on{opacity:1;pointer-events:auto}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.1) 75%)}
 .slide-in{position:relative;max-width:1280px;margin:0 auto;padding:0 24px;width:100%;color:#fff}
@@ -123,7 +126,8 @@ body.con-barra .copy{padding-bottom:100px}
 .sello{position:absolute;top:8px;padding:3px 9px;border-radius:999px;font-size:.68rem;font-weight:800;color:#fff}
 .sello.s1h{left:8px;background:var(--ink)}
 .sello.of{right:8px;background:var(--accent)}
-.sello.ag{right:8px;background:#6b7280}
+/* Cambio 2026-11-10 01:06:55 - El estado agotado ahora se muestra en rojo para mayor visibilidad. */
+.sello.ag{right:8px;background:#c62828}
 .cuerpo{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .card h3{margin:0;font-size:.92rem;line-height:1.3;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
 .precio{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
@@ -149,6 +153,14 @@ body.con-barra .copy{padding-bottom:100px}
 .pie-redes a,.pie-lista a{text-decoration:underline;text-decoration-color:#4b5563}
 .pie-lista{display:flex;flex-direction:column;gap:8px;font-size:.92rem}
 .copy{border-top:1px solid #2b2b2b;text-align:center;padding:18px 20px;font-size:.8rem;color:#9ca3af}
+
+/* Cambio 2026-11-10 01:06:55 - Se agregó el botón flotante grande de contacto por WhatsApp. */
+.wa-flotante{position:fixed;right:18px;bottom:20px;z-index:24;display:flex;align-items:center;gap:10px;padding:12px 18px 12px 12px;border-radius:999px;background:#16845b;color:#fff;box-shadow:0 12px 28px rgba(9,43,32,.32);transition:transform .2s,box-shadow .2s}
+.wa-flotante:hover{color:#fff;transform:translateY(-3px);box-shadow:0 16px 34px rgba(9,43,32,.42)}
+.wa-flotante b,.wa-flotante small{display:block;line-height:1.05}
+.wa-flotante b{font-size:.82rem;letter-spacing:.04em}
+.wa-flotante small{margin-top:4px;opacity:.85}
+.wa-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;color:#16845b;font-size:2rem;font-weight:900;line-height:1}
 
 /* barra del pedido */
 .barra-carrito{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));max-width:620px;margin:0 auto;background:var(--ink);color:#fff;border-radius:22px;padding:10px 10px 10px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:25;transition:transform .2s}

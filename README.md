@@ -1,4 +1,6 @@
-# Tienda de dispositivos
+# DONDE BILLY
+
+Catálogo moderno de dispositivos y accesorios con carrito, filtros, estados de disponibilidad y contacto directo por WhatsApp.
 
 Páginas
 - index.html es la tienda que ven tus clientes y se parece a la página principal de 1hora

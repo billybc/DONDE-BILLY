@@ -26,6 +26,8 @@ function pintarAjustes() {
   $("notaEntrega").hidden = !ajustes.notaEntrega;
   $("notaEntrega").textContent = ajustes.notaEntrega || "";
   $("linkWa").href = waUrl();
+  // Cambio 2026-11-10 01:06:55 - Se sincronizó el botón flotante con el número configurado.
+  $("waFlotante").href = waUrl("Hola, quiero información sobre un producto de DONDE BILLY.");
 
   const pq = (ajustes.porQue || []).filter((x) => x.titulo || x.texto);
   $("porque").hidden = pq.length === 0;
@@ -158,7 +160,8 @@ function pintarChips() {
     `<button class="chip ${c === vista.cat ? "on" : ""}" data-cat="${esc(c)}">${c === "Todos" ? "Todas" : iconoDe(c) + " " + esc(c)}</button>`).join("");
 }
 function accionHtml(p) {
-  if (p.disponible === false) return `<button class="btn block" disabled>No disponible</button>`;
+  // Cambio 2026-11-10 01:06:55 - Se hizo explícito el estado AGOTADO en la acción del producto.
+  if (p.disponible === false) return `<button class="btn block agotado-accion" disabled>AGOTADO</button>`;
   if (p.consultar) return `<button class="btn block btn-preg" data-id="${esc(p.id)}">Preguntar precio</button>`;
   const it = carrito.find((c) => c.id === p.id);
   if (!it) return `<button class="btn block btn-add" data-id="${esc(p.id)}">Agregar</button>`;
@@ -169,7 +172,7 @@ function cardHtml(p) {
   return `<article class="card ${agotado ? "agotado" : ""}">
     <div class="foto" data-ver="${esc(p.id)}"><img src="${esc(imagenDe(p))}" alt="${esc(p.nombre)}" loading="lazy" decoding="async">
       ${p.seccion === "1hora" ? '<span class="sello s1h">1HORA</span>' : ""}
-      ${agotado ? '<span class="sello ag">Agotado</span>' : tieneOferta(p) ? '<span class="sello of">Oferta</span>' : ""}</div>
+      ${agotado ? '<span class="sello ag">AGOTADO</span>' : tieneOferta(p) ? '<span class="sello of">Oferta</span>' : ""}</div>
     <div class="cuerpo">
       <h3 data-ver="${esc(p.id)}">${esc(p.nombre)}</h3>
       <div class="precio">${precioHtml(p)}</div>

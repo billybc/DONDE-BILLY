@@ -3,10 +3,11 @@ const H1 = "https://1hora.com/cdn/shop/files/";
 const FOTOS = "https://billybc.github.io/venta/fotos-para-vender/";
 
 const AJUSTES_BASE = {
-  nombreTienda: "Tienda de Todo",
+  // Cambio 2026-11-10 01:06:55 - Se estableció el nombre comercial y WhatsApp de DONDE BILLY.
+  nombreTienda: "DONDE BILLY",
   logo: "",
   avisoSuperior: "Por el momento solo en El Progreso. Tiempo de entrega de 15 a 20 días.",
-  whatsapp: "50200000000",
+  whatsapp: "50248551655",
   moneda: "Q",
   descuentoActivo: true,
   descuentoUnidades: 3,
@@ -63,6 +64,19 @@ const P1 = [
   { nombre: "GAR264 Power bank 10000 mAh carga rápida 22.5W", descripcion: "Pantalla LED y linterna incluida para llevarlo a todo lado.", categoria: "Bancos de energía", precio: 249, imagen: H1 + "gar158.jpg?v=1757477663&width=1000", destacado: true },
   { nombre: "BOC244 Altavoz Bluetooth portátil 7W", descripcion: "Pequeño y con buen sonido para casa o viajes.", categoria: "Altavoces", precio: 175, enOferta: true, precioOferta: 149, imagen: H1 + "boc244.jpg?v=1757477664&width=1000", destacado: true },
   { nombre: "AUT211 Audífonos inalámbricos con cancelación de ruido", descripcion: "Sonido nítido y ajuste cómodo para todo el día.", categoria: "Auriculares", precio: 299, imagen: H1 + "1_86987f4c-c135-406b-aa8c-1f545f965875.jpg?v=1756716174&width=1000" },
+];
+
+// Cambio 2026-11-10 01:06:55 - Se agregaron productos originales de muestra para las nuevas categorías.
+// Los precios, disponibilidad e imágenes se pueden editar desde el panel de administración.
+const PRODUCTOS_DONDE_BILLY = [
+  { nombre: "Kit de accesorios para teléfono", descripcion: "Selección práctica para proteger y complementar tu teléfono.", categoria: "Accesorios", precio: 85, destacado: true },
+  { nombre: "Audífonos inalámbricos compactos", descripcion: "Audio portátil con estuche de carga para el uso diario.", categoria: "Auriculares", precio: 175, destacado: true },
+  { nombre: "Batería portátil 10000 mAh", descripcion: "Energía extra para tus dispositivos cuando estás fuera de casa.", categoria: "Bancos de energía", precio: 225, destacado: true },
+  { nombre: "Cable USB-C reforzado", descripcion: "Cable resistente para carga y transferencia de datos.", categoria: "Cables", precio: 65 },
+  { nombre: "Cargador de pared de carga rápida", descripcion: "Carga eficiente para mantener tus dispositivos listos.", categoria: "Cargadores", precio: 115 },
+  { nombre: "Lámpara LED multiuso", descripcion: "Iluminación compacta para escritorio, dormitorio o viaje.", categoria: "Estilo de vida", precio: 145 },
+  { nombre: "Bocina portátil inalámbrica", descripcion: "Sonido envolvente en un formato fácil de transportar.", categoria: "Altavoces", precio: 235, destacado: true },
+  { nombre: "Selección favorita DONDE BILLY", descripcion: "Producto destacado de nuestra selección más consultada.", categoria: "Más vendidos", precio: 195, destacado: true },
 ];
 
 /* Productos de la página venta: nombre, precio, descripción, categoría y archivo de foto */
@@ -128,7 +142,8 @@ const OTROS = [
 ];
 
 const PRODUCTOS_EJEMPLO = [
-  ...P1.map((p, i) => ({ id: "e" + (i + 1), seccion: "1hora", enOferta: false, precioOferta: null, disponible: true, visible: true, destacado: false, consultar: false, ...p, orden: i + 1 })),
+  // Cambio 2026-11-10 01:06:55 - Se incorporó el catálogo de muestra a la sección principal.
+  ...[...P1, ...PRODUCTOS_DONDE_BILLY].map((p, i) => ({ id: "e" + (i + 1), seccion: "1hora", enOferta: false, precioOferta: null, disponible: true, visible: true, destacado: false, consultar: false, ...p, orden: i + 1 })),
   ...OTROS.map(([nombre, precio, descripcion, categoria, archivo], i) => ({
     id: "o" + (i + 1), nombre, descripcion, seccion: "otros", categoria, precio, enOferta: false, precioOferta: null,
     imagen: FOTOS + archivo, disponible: true, visible: true, destacado: false, consultar: precio === 0, orden: P1.length + i + 1,
