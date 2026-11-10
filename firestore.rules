@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Cambia este correo por el tuyo. Solo esa cuenta puede modificar la tienda.
+    function esAdmin() {
+      return request.auth != null && request.auth.token.email == 'TU_CORREO@gmail.com';
+    }
+
+    match /productos/{id}  { allow read: if true; allow write: if esAdmin(); }
+    match /categorias/{id} { allow read: if true; allow write: if esAdmin(); }
+    match /banners/{id}    { allow read: if true; allow write: if esAdmin(); }
+    match /config/{id}     { allow read: if true; allow write: if esAdmin(); }
+  }
+}

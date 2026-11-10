@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Tienda</title>
+<link rel="stylesheet" href="css/tienda.css">
+</head>
+<body class="tienda">
+
+<div id="aviso" class="aviso" hidden></div>
+
+<header class="cab">
+  <div class="cab-in">
+    <button id="btnMenu" class="icon-btn menu-btn" aria-label="Abrir menú">☰</button>
+    <a href="#inicio" class="marca" id="marca">Tienda</a>
+    <nav id="nav" class="nav">
+      <a href="#inicio">Inicio</a>
+      <div class="drop">
+        <a href="#productos" data-sec-link="1hora">Productos ▾</a>
+        <div id="dropMenu" class="drop-menu"></div>
+      </div>
+      <a href="#productos" id="navOtros" data-sec-link="otros">Otros</a>
+      <a href="#porque" id="navPorque">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="cab-acc">
+      <button id="btnBuscar" class="icon-btn" aria-label="Buscar">🔍</button>
+      <button id="btnCarrito" class="icon-btn carrito" aria-label="Ver carrito">🛒<span id="contador">0</span></button>
+    </div>
+  </div>
+  <div id="buscadorFila" class="buscador-fila" hidden>
+    <input id="buscar" type="search" placeholder="Buscar productos" aria-label="Buscar productos">
+  </div>
+</header>
+
+<main>
+  <section id="inicio" class="portada">
+    <div id="slides"></div>
+    <button id="prevSlide" class="flecha izq" aria-label="Anterior">‹</button>
+    <button id="nextSlide" class="flecha der" aria-label="Siguiente">›</button>
+    <div id="puntos" class="puntos"></div>
+  </section>
+
+  <section id="categorias" class="seccion" hidden>
+    <h2 class="titulo-c">Elige tu categoría</h2>
+    <div id="g1"><h3 class="sub-g">Productos 1HORA</h3><div id="tiles1" class="tiles"></div></div>
+    <div id="gO"><h3 class="sub-g">Otros productos</h3><div id="tilesO" class="tiles"></div></div>
+    <a class="btn-borde" href="#productos" data-enlace>Ver todos los productos</a>
+  </section>
+
+  <section id="promo" class="promo" hidden>
+    <div id="promoTxt" class="promo-txt"></div>
+  </section>
+
+  <section id="porque" class="seccion fondo-suave" hidden>
+    <h2 class="titulo-c" id="porqueTitulo"></h2>
+    <div id="porqueGrid" class="pq-grid"></div>
+  </section>
+
+  <section id="destacados" class="seccion" hidden>
+    <h2 class="titulo-c" id="destacadosTitulo"></h2>
+    <div id="destGrande" class="dest-grande"></div>
+    <div id="destTiles" class="dest-tiles"></div>
+  </section>
+
+  <section id="productos" class="seccion">
+    <h2 class="titulo-c" id="catalogoTitulo"></h2>
+    <div id="tabs" class="tabs" hidden>
+      <button data-sec="todos" class="on">Todos</button>
+      <button data-sec="1hora" id="tab1hora">1HORA</button>
+      <button data-sec="otros" id="tabOtros">Otros</button>
+    </div>
+    <div id="chips" class="chips"></div>
+    <p id="cargando" class="vacio">Cargando productos...</p>
+    <div id="grid" class="grid"></div>
+    <p id="notaEntrega" class="nota" hidden></p>
+  </section>
+</main>
+
+<footer id="contacto" class="pie">
+  <div class="pie-in">
+    <div>
+      <b class="pie-marca" id="pieMarca"></b>
+      <div id="pieContacto" class="pie-lineas"></div>
+      <div id="pieRedes" class="pie-redes"></div>
+      <a id="linkWa" class="btn-claro peq-btn" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+    <div><h4>Categorías</h4><div id="pieCats" class="pie-lista"></div></div>
+    <div><h4>Información</h4><div class="pie-lista">
+      <a href="#productos" data-enlace>Todos los productos</a>
+      <a href="#productos" data-sec-link="otros">Otros productos</a>
+      <a href="#porque">Por qué elegirnos</a>
+    </div></div>
+  </div>
+  <div id="copy" class="copy"></div>
+</footer>
+
+<div id="barraCarrito" class="barra-carrito" hidden>
+  <div class="bc-info"><span id="bcCantidad"></span><b id="bcTotal"></b><small id="bcAviso"></small></div>
+  <button id="btnVerPedido" class="btn">Ver pedido</button>
+</div>
+
+<div id="fondo" class="fondo" data-cerrar></div>
+
+<section id="hojaCarrito" class="hoja lateral" aria-label="Tu pedido">
+  <div class="hoja-cab"><h3>Tu pedido</h3><button class="x" data-cerrar aria-label="Cerrar">✕</button></div>
+  <div id="carritoItems" class="hoja-cuerpo"></div>
+  <div id="carritoResumen" class="hoja-pie" hidden>
+    <p id="avisoDesc" class="aviso-desc"></p>
+    <div class="linea"><span>Subtotal</span><span id="resSubtotal"></span></div>
+    <div class="linea verde" id="filaDesc"><span id="txtDesc"></span><span id="resDesc"></span></div>
+    <div class="linea total"><span>Total</span><span id="resTotal"></span></div>
+    <button id="btnWa" class="btn wa block">Enviar pedido por WhatsApp</button>
+    <button id="btnVaciar" class="enlace">Vaciar pedido</button>
+  </div>
+</section>
+
+<section id="hojaDetalle" class="hoja centro" aria-label="Detalle del producto">
+  <div class="hoja-cab"><h3>Producto</h3><button class="x" data-cerrar aria-label="Cerrar">✕</button></div>
+  <div id="detalleCuerpo" class="hoja-cuerpo"></div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel de la tienda</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+<header class="top">
+  <div class="top-in">
+    <span class="logo">Panel de la tienda</span>
+    <span class="relleno"></span>
+    <a href="index.html" class="btn ghost sm">Ver tienda</a>
+    <button id="btnSalir" class="btn sm" hidden>Salir</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="avisoFirebase" class="panel" hidden>
+    <h2>Falta conectar Firebase</h2>
+    <p>Para guardar cambios pega la configuración de tu proyecto en <code>js/firebase-config.js</code>. Los pasos están en el archivo README.md.</p>
+    <p>Mientras tanto la tienda muestra datos de ejemplo que no se guardan.</p>
+  </section>
+
+  <section id="loginBox" class="panel narrow" hidden>
+    <h2>Entrar al panel</h2>
+    <form id="formLogin">
+      <label>Correo<input type="email" id="lCorreo" required></label>
+      <label>Contraseña<input type="password" id="lPass" required></label>
+      <p id="loginError" class="error"></p>
+      <button class="btn block" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="panelAdmin" hidden>
+    <div class="tabs">
+      <button class="on" data-tab="productos">Productos</button>
+      <button data-tab="portada">Portada</button>
+      <button data-tab="categorias">Categorías</button>
+      <button data-tab="ajustes">Ajustes</button>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div id="tab-productos">
+      <div class="barra">
+        <button id="btnNuevo" class="btn">+ Nuevo producto</button>
+        <select id="fSeccion">
+          <option value="todas">Todas las secciones</option>
+          <option value="1hora">Solo 1HORA</option>
+          <option value="otros">Solo Otros</option>
+        </select>
+        <input id="fTexto" type="search" placeholder="Buscar por nombre">
+      </div>
+      <p class="peq"><span id="conteo"></span>. Cambia la sección con el selector de cada fila. Con Disponible apagado sale Agotado y con Visible apagado se esconde de la tienda. Las flechas cambian el orden.</p>
+      <div id="lista" class="lista"></div>
+      <p><button id="btnEjemplo" class="enlace">Cargar tienda de ejemplo con productos, categorías y banners</button></p>
+    </div>
+
+    <!-- PORTADA -->
+    <div id="tab-portada" hidden>
+      <form id="formAviso" class="panel">
+        <h2>Aviso de arriba</h2>
+        <p class="peq">Es la franja negra que se ve sobre el menú. Déjala vacía para esconderla.</p>
+        <label>Texto del aviso<input id="aviso"></label>
+        <button class="btn sm" type="submit">Guardar aviso</button> <span id="avisoMsg" class="ok"></span>
+      </form>
+
+      <div class="panel">
+        <div class="encab"><h2>Banners de la portada</h2><button id="btnNuevoBanner" class="btn sm">+ Nuevo banner</button></div>
+        <p class="peq">Son las imágenes grandes del inicio y pasan solas. Usa fotos anchas y horizontales.</p>
+        <div id="listaBanners" class="lista"></div>
+      </div>
+
+      <form id="formPromo" class="panel">
+        <h2>Banner de promoción</h2>
+        <p class="peq">Es el banner que va debajo de las categorías. Quita título e imagen para esconderlo.</p>
+        <div class="campo"><span class="etq">Imagen de fondo</span><div id="promoImgHost"></div></div>
+        <label>Título<input id="prTitulo"></label>
+        <label>Texto debajo del título<input id="prSub"></label>
+        <div class="dos">
+          <label>Texto del botón<input id="prBoton"></label>
+          <label>A dónde lleva<input id="prEnlace" placeholder="#productos, #1hora, #otros o https://"></label>
+        </div>
+        <button class="btn sm" type="submit">Guardar promoción</button> <span id="promoMsg" class="ok"></span>
+      </form>
+    </div>
+
+    <!-- CATEGORÍAS -->
+    <div id="tab-categorias" hidden>
+      <div class="panel">
+        <div class="encab"><h2>Categorías</h2><button id="btnNuevaCat" class="btn sm">+ Nueva categoría</button></div>
+        <p class="peq">Son las imágenes de Elige tu categoría. Si una categoría no tiene imagen uso la foto de uno de sus productos. El nombre debe ser igual al que pones en cada producto.</p>
+        <div id="listaCategorias" class="lista"></div>
+      </div>
+    </div>
+
+    <!-- AJUSTES -->
+    <div id="tab-ajustes" hidden>
+      <form id="formAjustes" class="panel">
+        <h2>Tienda</h2>
+        <label>Nombre de la tienda<input id="aNombre" required></label>
+        <div class="campo"><span class="etq">Logo. Si lo dejas vacío se muestra el nombre</span><div id="logoImgHost"></div></div>
+        <label>WhatsApp con código de país y sin signos. Ejemplo 50255551234<input id="aWa" required></label>
+        <div class="dos">
+          <label>Símbolo de moneda<input id="aMoneda" maxlength="4" required></label>
+          <label>Título del catálogo<input id="aCatTitulo"></label>
+        </div>
+        <hr>
+        <h2>Descuento por cantidad</h2>
+        <label class="sw"><input type="checkbox" id="aDescActivo"> Descuento activo</label>
+        <div class="dos">
+          <label>Desde cuántos productos<input type="number" id="aDescUnid" min="2" required></label>
+          <label>Porcentaje de descuento<input type="number" id="aDescPct" min="1" max="90" required></label>
+        </div>
+        <hr>
+        <h2>Por qué elegirnos</h2>
+        <label>Título de la sección. Déjalo y los tres textos vacíos para esconderla<input id="aPqTitulo"></label>
+        <div class="dos"><label>Punto 1 título<input id="aPq1t"></label><label>Punto 1 texto<input id="aPq1x"></label></div>
+        <div class="dos"><label>Punto 2 título<input id="aPq2t"></label><label>Punto 2 texto<input id="aPq2x"></label></div>
+        <div class="dos"><label>Punto 3 título<input id="aPq3t"></label><label>Punto 3 texto<input id="aPq3x"></label></div>
+        <hr>
+        <h2>Otros textos</h2>
+        <label>Título de productos destacados<input id="aDestTitulo"></label>
+        <label>Nota de entrega y garantía debajo del catálogo<textarea id="aNota" rows="3"></textarea></label>
+        <hr>
+        <h2>Contacto y redes</h2>
+        <label>Dirección<input id="aDir"></label>
+        <div class="dos"><label>Correo<input id="aCorreo" type="email"></label><label>Teléfono<input id="aTel"></label></div>
+        <div class="dos"><label>Facebook enlace<input id="aFb"></label><label>Instagram enlace<input id="aIg"></label></div>
+        <div class="dos"><label>YouTube enlace<input id="aYt"></label><label>TikTok enlace<input id="aTt"></label></div>
+        <p id="ajMsg" class="ok"></p>
+        <button class="btn" type="submit">Guardar ajustes</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- Formulario de producto -->
+<div id="modal" class="modal" hidden>
+  <form id="formProducto" class="modal-in">
+    <div class="modal-cab"><h3 id="modalTitulo">Nuevo producto</h3><button type="button" id="btnCerrarModal" class="x">✕</button></div>
+    <input type="hidden" id="pId">
+    <label>Nombre<input id="pNombre" required></label>
+    <label>Descripción corta<textarea id="pDesc" rows="2"></textarea></label>
+    <div class="dos">
+      <label>Sección<select id="pSeccion"><option value="1hora">1HORA</option><option value="otros">Otros</option></select></label>
+      <label>Categoría<input id="pCategoria" list="listaCats" placeholder="Escribe o elige"></label>
+    </div>
+    <datalist id="listaCats"></datalist>
+    <div class="dos">
+      <label>Precio normal<input type="number" id="pPrecio" min="0" step="0.01"></label>
+      <label>Precio de oferta<input type="number" id="pPrecioOferta" min="0" step="0.01"></label>
+    </div>
+    <label class="sw"><input type="checkbox" id="pOferta"> Este producto está en oferta</label>
+    <label class="sw"><input type="checkbox" id="pConsultar"> Precio a consultar. Muestra el botón Preguntar precio</label>
+    <div class="campo"><span class="etq">Imagen</span><div id="pImgHost"></div></div>
+    <div class="dos">
+      <label class="sw"><input type="checkbox" id="pDisponible" checked> Disponible</label>
+      <label class="sw"><input type="checkbox" id="pVisible" checked> Visible en la tienda</label>
+    </div>
+    <label class="sw"><input type="checkbox" id="pDestacado"> Mostrar en Productos destacados. El primero sale grande</label>
+    <button class="btn block" type="submit">Guardar producto</button>
+  </form>
+</div>
+
+<!-- Formulario genérico para banners y categorías -->
+<div id="modalGen" class="modal" hidden>
+  <form id="formGen" class="modal-in">
+    <div class="modal-cab"><h3 id="genTitulo"></h3><button type="button" id="btnCerrarGen" class="x">✕</button></div>
+    <div id="genCampos"></div>
+    <button class="btn block" type="submit">Guardar</button>
+  </form>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/datos.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

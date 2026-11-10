@@ -1,0 +1,10 @@
+# Local editor and operating-system files
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+
+# Local Firebase configuration overrides
+.env
+.env.*
